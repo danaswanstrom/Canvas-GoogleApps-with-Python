@@ -1,9 +1,9 @@
-#google_connect.py file
 
 #Connection to Google
 
 #Code to import all of the functions that we will need
 
+from config import *
 import gspread
 from oauth2client.client import SignedJwtAssertionCredentials
 import pandas as pd
@@ -13,15 +13,15 @@ import json
 
 #code to connect to Google Spreadsheets
 #information for this section came from http://pbpython.com/pandas-google-forms-part1.html
-SECRETS_FILE = ".\Tokens\GoogleSpreadsheettoCanvasPythn-8a3815cd54b0.json"
+
 SCOPE = ["https://spreadsheets.google.com/feeds"]
 json_key = json.load(open(SECRETS_FILE))
-
 credentials = SignedJwtAssertionCredentials(json_key['client_email'],
 bytes(json_key['private_key'], 'UTF-8'),
 SCOPE)
-
 gc = gspread.authorize(credentials)
+
+
 
 def listGoogleSheets():
     """
@@ -46,3 +46,13 @@ def importSheet(workbookName):
     lowercaseColumnNames = [x.lower() for x in firstSheetDataFrame.columns.values]
     firstSheetDataFrame.columns = lowercaseColumnNames
     return firstSheetDataFrame
+
+
+canvasStudentImport = importSheet("1801Student")
+canvasStudentImport.drop_duplicates(inplace = True)
+canvasStudentIndexed = canvasStudentImport.set_index(['login_id'])
+
+canvasStaffImport = importSheet("1801Staff")
+canvasStaffImport.drop_duplicates(inplace = True)
+canvasStaffIndexed = canvasStaffImport.set_index(['login_id'])
+canvasStaffandStudentsIndexed = pd.concat([canvasStudentIndexed, canvasStaffIndexed], axis=0)
