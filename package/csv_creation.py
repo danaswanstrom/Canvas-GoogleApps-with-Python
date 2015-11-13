@@ -1,21 +1,22 @@
+from google_connect import *
+from config import *
 import pandas as pd
 import numpy as np
 import json
 import csv
 
-#CSV Formats
-columnsCoursesCSV = ["course_id", "long_name", "short_name", "account_id", "status"]
-columnsEnrollmentCSV = ["course_id","user_id","role","status"]
 
+#### Moved to Config.py
+#CSV Formats
+#columnsCoursesCSV = ["course_id", "long_name", "short_name", "account_id", "status"]
+#columnsEnrollmentCSV = ["course_id","user_id","role","status"]
 #Define location of file exports. Must have a trailing "/" for it to work.
-csvExportLocation = "G:/Inbox/"
+#csvExportLocation = "C:\Temp\Inbox"
 
 
 #The first group of funtions are Skyward File injestions. Long term we want the script here to access the files from
 #a server that has fresh files each night.
 
-#csvfilelocation =  "N:\NHSIT\SkywardtoCanvasExports\SkywardtoCanvasExports"
-#csvfilelocation =  "//nhs00/nhsstaffresources/NHSIT/SkywardtoCanvasExports"
 
 def coursesDF(workbookName,accountID):
     """
@@ -34,7 +35,7 @@ def coursesDF(workbookName,accountID):
     importedGoogleSheet = importSheet(workbookName)
     index = 0
     courses = pd.DataFrame(data=np.zeros((0,len(columnsCoursesCSV))), columns=columnsCoursesCSV)
-    while importedGoogleSheet.course_name[index] != '':
+    while index < len(importedGoogleSheet.index) and importedGoogleSheet.course_name[index] != '':
         courses = courses.append({'course_id':importedGoogleSheet.loc[index,"course_id"], 'long_name':importedGoogleSheet.loc[index,"course_name"],'short_name':importedGoogleSheet.loc[index,"course_name"], 'account_id':accountID, 'status':'active'},ignore_index=True)
         index += 1
     return courses
@@ -62,7 +63,7 @@ def enrollmentsDF(workbookName):
     enrollments = pd.DataFrame(data=np.zeros((0,len(columnsEnrollmentCSV))), columns=columnsEnrollmentCSV)
         
     #For enrollments to be created for a course, the course must have a name given in the Google spreadsheet. Next line checks for blank course names.
-    while importedGoogleSheet.course_name[index] != '':
+    while index < len(importedGoogleSheet.index) and importedGoogleSheet.course_name[index] != '':
         #Three sections of code to add principals (which get added as teachers), teachers, and then students
         #The range for each section is based on the number of columns in the original google sheet
         #Each section has a loop that goes through possible column names that might be in the Google spreadsheet
@@ -119,3 +120,6 @@ def createCSVsCoursesEnrollmentsTerms(workbookName, AccountID):
     enrollments.to_csv(csvExportLocation +"enrollments.csv", index=False, float_format='%.0f')
     courses.to_csv(csvExportLocation +"courses.csv", index=False, float_format='%.0f')
     return print("Done with CSV Files. Files located in " + csvExportLocation)
+
+
+
