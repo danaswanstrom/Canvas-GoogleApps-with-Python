@@ -1,4 +1,6 @@
 #config.py file
+import sys
+import os
 
 
 #First is Canvas Related Config Information
@@ -10,7 +12,10 @@ Canvas_base_api_url = 'https://ecasd.test.instructure.com/api/'
 SECRETS_FILE = "C:\Temp\GoogleSpreadsheettoCanvasPythn-8a3815cd54b0.json"
 
 #Define location of the CSV file exports. Must have a trailing "/" for it to work.
-csvExportLocation = "X:/Inbox/"
+      
+path = os.getcwd()
+csvExportLocation = "{path}\\CSVZipFiles\\".format(path = path)
+#csvExportLocation = "X:/Inbox/"
 
 
 ########## DO NOT EDIT BELOW THIS LINE ##############

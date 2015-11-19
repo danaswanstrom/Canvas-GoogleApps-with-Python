@@ -9,4 +9,5 @@ school_account = input ('What is the school account number?')
 
 createCSVsCoursesEnrollmentsTerms(sheet_choice, school_account)
 sisIMPORT()
+createZip()
 input ('Hit Enter to Exit')
