@@ -9,12 +9,16 @@ import zipfile
 #account_id = 1
 #base_api_url = 'https://ecasd.test.instructure.com/api/'
 
-
 ### Post csv or zip file for Sis Import. Just change the file name.
 def createZip():
     canvasZipfile = zipfile.ZipFile('{csvExportLocation}courses.zip'.format(csvExportLocation = csvExportLocation), 'w')
-    canvasZipfile.write('{csvExportLocation}courses.csv'.format(csvExportLocation = csvExportLocation), compress_type=zipfile.ZIP_DEFLATED)
-    canvasZipfile.write('{csvExportLocation}enrollments.csv'.format(csvExportLocation = csvExportLocation),compress_type=zipfile.ZIP_DEFLATED)
+    #canvasZipfile.write('{csvExportLocation}courses.csv'.format(csvExportLocation = csvExportLocation)[,
+     #                   os.path.basename(canvasZipfile)[,compress_type=zipfile.ZIP_DEFLATED]])
+    #canvasZipfile.write('{csvExportLocation}enrollments.csv'.format(csvExportLocation = csvExportLocation)[,
+     #                   os.path.basename(canvasZipfile)[, compress_type=zipfile.ZIP_DEFLATED]])
+    canvasZipfile.write('{csvExportLocation}courses.csv'.format(csvExportLocation = csvExportLocation),compress_type=zipfile.ZIP_DEFLATED)
+    canvasZipfile.write('{csvExportLocation}enrollments.csv'.format(csvExportLocation = csvExportLocation),
+                        compress_type=zipfile.ZIP_DEFLATED)
     canvasZipfile.close()
     return print("Zip file created")
     
