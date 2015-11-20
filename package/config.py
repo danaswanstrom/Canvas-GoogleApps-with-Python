@@ -4,7 +4,11 @@ import os
 
 
 #First is Canvas Related Config Information
-CanvasSISImportToken = "***REMOVED***"
+danasToken = "***REMOVED***"
+sis_import_Token = "***REMOVED***"
+CanvasSISImportToken = danasToken
+
+
 Canvas_account_id = 1
 Canvas_base_api_url = 'https://ecasd.test.instructure.com/api/'
 
