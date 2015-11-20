@@ -4,7 +4,11 @@ import os
 
 
 #First is Canvas Related Config Information
-CanvasSISImportToken = "5278~XiOGA1DzWNO1dYvtHtgbHOcIGSlYQI2HVghE3EcnoEBlnF0H3kTo3cDI10DdPm1K"
+danasToken = "5278~Myvo2xDvPkpIN1McEHph6WzYUBXvgRmzMWjrkzpb5DgzfSH8JI1D76jYixbbCA6Z"
+sis_import_Token = "5278~XiOGA1DzWNO1dYvtHtgbHOcIGSlYQI2HVghE3EcnoEBlnF0H3kTo3cDI10DdPm1K"
+CanvasSISImportToken = danasToken
+
+
 Canvas_account_id = 1
 Canvas_base_api_url = 'https://ecasd.test.instructure.com/api/'
 

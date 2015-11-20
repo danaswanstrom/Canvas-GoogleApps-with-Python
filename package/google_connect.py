@@ -33,6 +33,14 @@ def listGoogleSheets():
         print("{} - {}".format(sheet.title, sheet.id))
     return("That's the List!")
 
+def createListGoogleSheets():
+    """
+    This function will create a python list of the spreadsheets that can be used in loops etc.
+    """
+    GoogleSheetsList = []
+    for sheet in gc.openall():
+        GoogleSheetsList.append(sheet.title)
+    return GoogleSheetsList
 
 def importSheet(workbookName):
     """

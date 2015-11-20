@@ -10,8 +10,9 @@ import zipfile
 #base_api_url = 'https://ecasd.test.instructure.com/api/'
 
 ### Post csv or zip file for Sis Import. Just change the file name.
-def createZip():
-    canvasZipfile = zipfile.ZipFile('{csvExportLocation}courses.zip'.format(csvExportLocation = csvExportLocation), 'w')
+def createZip(subAccountNumber):
+    canvasZipfile = zipfile.ZipFile('{csvExportLocation}canvasUpload-{subAccountNumber}.zip'.format(csvExportLocation = csvExportLocation,
+                                                                                            subAccountNumber = subAccountNumber), 'w')
     #canvasZipfile.write('{csvExportLocation}courses.csv'.format(csvExportLocation = csvExportLocation)[,
      #                   os.path.basename(canvasZipfile)[,compress_type=zipfile.ZIP_DEFLATED]])
     #canvasZipfile.write('{csvExportLocation}enrollments.csv'.format(csvExportLocation = csvExportLocation)[,
@@ -24,10 +25,11 @@ def createZip():
     
 
 
-def sisIMPORT():
+def sisIMPORT(subAccountNumber):
     path = 'v1/accounts/{account_id}/sis_imports'
     url = Canvas_base_api_url + path.format(account_id=Canvas_account_id)
-    files = {'attachment': open('{csvExportLocation}courses.csv'.format(csvExportLocation = csvExportLocation), 'rb')}
+    files = {'attachment': open('{csvExportLocation}canvasUpload-{subAccountNumber}.zip'.format(csvExportLocation = csvExportLocation,
+                                                                                            subAccountNumber = subAccountNumber), 'rb')}
     headers = {'Authorization':'Bearer {token}'.format(token=CanvasSISImportToken)}
     res = requests.post(url, files=files, headers = headers)
     return print('SIS Import Complete')
@@ -45,3 +47,29 @@ def sis_import_status():
     rJson = r.json()
     print(rJson['sis_imports'][0])
     return print('Thats It')
+
+def find_sis_user_id(search_term):
+    """
+    Queries by administrative users will search on SIS ID, name, or email address; non- administrative queries will 
+    only be compared against name. Used to return the sis_user_id.
+    In most cases, the search_term will be the login_id.
+    """
+    path = 'v1/accounts/1/users'
+    url = Canvas_base_api_url + path.format(account_id=Canvas_account_id) + '?search_term={search_term}'.format(search_term=search_term)
+    headers = {'Authorization':'Bearer {token}'.format(token=CanvasSISImportToken)}
+    r = requests.get(url, headers=headers)
+    rJson = r.json()
+    print(rJson['sis_user_id'][0])
+    return print('Thats It')
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
