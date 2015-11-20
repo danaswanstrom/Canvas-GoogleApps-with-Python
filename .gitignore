@@ -215,3 +215,9 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 *.zip
+<<<<<<< HEAD
+package/CSVZipFiles/courses.csv
+*.csv
+*.csv
+=======
+>>>>>>> refs/remotes/origin/master

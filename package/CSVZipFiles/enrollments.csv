@@ -1,0 +1,5 @@
+course_id,user_id,role,status
+MON-001,95567,Teacher,active
+MON-001,27351,Teacher,active
+MON-001,100004,Student,active
+MON-002,999998,Student,active
