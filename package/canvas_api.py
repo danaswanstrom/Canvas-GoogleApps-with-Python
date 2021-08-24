@@ -5,7 +5,7 @@ import json
 import zipfile
 
 #csvExportLocation = "X:/Inbox/"
-#token = "***REMOVED***"
+#token = "replacewithyourowntoken"
 #account_id = 1
 #base_api_url = 'https://ecasd.test.instructure.com/api/'
 
