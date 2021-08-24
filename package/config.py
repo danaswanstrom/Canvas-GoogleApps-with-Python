@@ -4,8 +4,8 @@ import os
 
 
 #First is Canvas Related Config Information
-danasToken = "***REMOVED***"
-sis_import_Token = "***REMOVED***"
+# danasToken = {Need to enter it here}
+# sis_import_Token = {Need to enter it here}
 CanvasSISImportToken = danasToken
 
 
